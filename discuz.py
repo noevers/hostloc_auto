@@ -26,6 +26,11 @@ class Discuz:
         self.session = self.discuz_login.session
         self.formhash = self.discuz_login.post_formhash
 
+    
+    def tz(self):
+        self.discuz_login.get_TZ()
+
+    
     def get_host(self, pub_url):
         res = requests.get(pub_url)
         res.encoding = "utf-8"
@@ -158,8 +163,9 @@ if __name__ == '__main__':
         chatgpt_key = random.choice(config.chatgpt_keys)
         discuz = Discuz(hostname, username, password, chatgpt_key)
         discuz.login()
-        discuz.signin()
-        discuz.visit_home()
+        //discuz.signin()
+        //discuz.visit_home()
+        discuz.tz()
         if config.auto_replay:
             # 循环执行50次
             for i in range(50):
