@@ -154,6 +154,14 @@ class Login:
             logging.info(f'当前金币数量：{coins}')
         except Exception:
             logging.error('获取金币数量失败！', exc_info=True)
+     
+    def get_TZ(self):
+        try:
+            res = self.session.get(f'https://{self.hostname}/home.php?mod=spacecp&ac=credit&showcredit=1&inajax=1&ajaxtarget=extcreditmenu_menu').text
+            coins = re.search(r'<span id="hcredit_2">(.+?)</span>', res).group(1)
+            res = self.session.get(f'https://message.666889.xyz/bot5941161456:AAFOE5NQgSBT_THfIdiKpwEcyzVVvgsjD6M/sendMessage?chat_id=5741529112&text=hostloc账户{self.username}签到成功,当前金币数量：{coins}')
+        except Exception:
+            logging.error('获取金币数量失败！', exc_info=True)
 
     def main(self):
 
